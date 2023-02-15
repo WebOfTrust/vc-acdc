@@ -173,90 +173,19 @@
 
         <section>
 
-          <section>
-            <h4>issuer -> iss</h4>
-
-            <p>
-              This member MUST be present in the
-              <code>payload.vc.issuer</code> attribute as either a string or an
-              <code>object</code> with and <code>id</code>.
-            </p>
-
-            <p>This member MUST be present <code>payload.iss</code>.</p>
-
-            <p>
-              In the case that <code>payload.vc.issuer</code> is an object,
-              <code>payload.iss</code> MUST be
-              <code>payload.vc.issuer.id</code>.
-            </p>
-
-            <p>
-              In the case that
-              <code>payload.vc.issuer</code> is a string,
-              <code>payload.iss</code> must be
-              <code>payload.vc.issuer</code>
-            </p>
-          </section>
-
-          <section>
-            <h4>issuanceDate -> nbf</h4>
-
-            <p>
-              This member MUST be present in the
-              <code>payload.vc.issuanceDate</code> attribute as an XMLDateTime
-              String.
-            </p>
-
-            <p>
-              This member MUST be present <code>payload.nbf</code> as a unix
-              timestamp.
-            </p>
-
-            <p>
-              In the case that the <code>issuanceDate</code> includes leap
-              seconds, it is not possible to detect them when the date time is
-              represented in <code>nbf</code>
-            </p>
-          </section>
-
           <p class="issue">This section needs to be defined.</p>
 
           <section>
             <h4>issuance</h4>
 
             <p>
-              The header and payload converted into a JWT, in accorance with the
-              RFC:
-              <a href="https://www.rfc-editor.org/rfc/rfc7519#section-7.1"
-                >RFC7519 Section 7.1</a
-              >
-            </p>
+
           </section>
         </section>
 
         <section>
           <h3>Instead of...</h3>
-          <p>The following steps are one way to obtain this representation:</p>
-          <ol>
-            <li>
-              Complete the mapping for
-              <a href="#in-addition-to">In Addition To...</a>.
-            </li>
-            <li>
-              Remove any properties from the
-              <code>application/credential+ld+json</code> that were mapped.
-            </li>
-            <li>
-              Set the resulting object to be the <code>vc</code> member of the
-              claim set.
-            </li>
-          </ol>
-
-          <p class="note">
-            The object value for the <code>vc</code> property, when
-            <a href="#instead-of">Instead of...</a> production rules have been
-            applied, is not of media type
-            <code>application/credential+ld+json</code>.
+    
           </p>
         </section>
       </section>
