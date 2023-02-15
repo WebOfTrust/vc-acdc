@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>
-      Securing Verifiable Credentials using Authentic Chained Data Containers
+      Securing Verifiable Credentials using Authentic Chained Data Containers.
     </title>
     <script
       src="https://www.w3.org/Tools/respec/respec-w3c"
@@ -88,11 +88,8 @@
       <h2>Introduction</h2>
       <p>
         Authentic Chained Data Containers (ACDC) [[!ACDC]] is a means of
-        expressing
-        <a>claims</a> to be transferred between two parties. Providing a
-        representation of the Verifiable Credentials Data Model for ACDC allows
-        existing systems and libraries to participate in the ecosystem described
-        in Section <a href="#ecosystem-overview"></a>. Some of the major
+        providing an authentication and autorization layer for the payload
+        contained witin across multiple media types. Some of the major
         distinguishing features of ACDCs include normative support for chaining,
         use of composable JSON Schema [JSch][JSchCp], support for Ricardian
         contracts [RC], support for chain-link confidentiality [CLC], a well
@@ -106,97 +103,53 @@
         <h5>Relation to the Verifiable Credentials Data Model</h5>
 
         <p>
-          This specification defines encoding rules of the Verifiable Credential
-          Data Model within an ACDC.
+          This specification defines a mechanism of the creating a Verifiable
+          Proof for a Verifiable Credential Data Model as an ACDC.
         </p>
       </section>
 
       <section>
-        <h5>ACDC Considerations</h5>
+        <h5>VC Data Model Considerations</h5>
 
         <section>
-          <h6>ACDC Encoding</h6>
+          <h6>Embedding a VC in an ACDC</h6>
           <p class="note">
-            Encoding of a credential within the payload of an ACDC
-
-            Create payload attribute
-
-            populate relevant ACDC properties 
+            Encoding of a credential within the payload of an ACDC Create
+            payload attribute populate relevant ACDC properties
 
             <code>d/i/s/a/p</code>
           </p>
-                
-          <p class="note">
-            Payload as SAID
-          </p>
 
-          <p class="note">
-            CESR representation of signed ACDC
-          </p>
-        </section>
+          <p class="note">Payload as SAID</p>
 
-        <section>
-          <h6>ACDC Decoding</h6>
-          <p class="note">
-            Decoding of a credential within the payload of an ACDC
-          </p>
-                
-          <p class="note">
-            Payload as SAID
-          </p>
-
-          <p class="note">
-            CESR representation of signed ACDC
-          </p>
-        </section>
-
-        <section>
-            <h6>ACDC Signing</h6>
-            <p class="note">
-                CESR / CESR Proof signatures
-              </p>
-          </section>
-      </section>
-    </section>
-
-      <h2>Version 1.1</h2>
-      <section id="production">
-        <h2>Production</h2>
-
-        <p>
-          This section describes how to produce a VC-ACDC encoded
-          <code>VerifiableCredential</code> from an object of media type
-          <code>application/credential+ld+json</code>.
-        </p>
-
-        <p class="issue">This section needs to be reference the addition of a payload attribute to the ACDC specification.</p>
-
-        <section>
-
-          <p class="issue">This section needs to be defined.</p>
-
-          <section>
-            <h4>issuance</h4>
-
-            <p>
-
-          </section>
-        </section>
-
-        <section>
-          <h3>Instead of...</h3>
-    
-          </p>
+          <p class="note">CESR representation of signed ACDC</p>
         </section>
       </section>
     </section>
+
+    <h2>Version 1.1</h2>
+    <section id="production">
+      <h2>Production</h2>
+
+      <p>
+        This section describes how to produce a VC-ACDC encoded
+        <code>VerifiableCredential</code> from an object of media type
+        <code>application/credential+ld+json</code>.
+      </p>
+
+      <p class="issue">
+        This section needs to be reference the addition of a payload attribute
+        to the ACDC specification.
+      </p>
+    </section>
+
     <section>
       <h2>Version 2</h2>
       <p class="note">
-        This representation relies on the addition of a <code>payload</code> attribute to ACDC.
-      </p>
-      <p class="note">
-        Production of this representation may use <code>credential+ld+json</code> as an input.
+        This representation relies on the addition of a
+        <code>payload</code> attribute to ACDC.
+
+        Describe the the implicit @context
       </p>
       <section>
         <h2>Credential</h2>
@@ -206,9 +159,7 @@
             data-include-format="json"
           ></pre>
         </aside>
-        <p class="note">
-
-        </p>
+        <p class="note"></p>
       </section>
       <section>
         <h2>Verifiable Credential</h2>
@@ -231,57 +182,23 @@
 
     <section class="appendix informative">
       <h2>IANA Considerations</h2>
-        <h2>
-          The <code>application/credential-claims-set-1.1+json</code> Media Type
-        </h2>
-        <p>
-          This specification registers the
-          <code>application/credential-claims-set-1.1+json</code> MIME Media
-          Type specifically for identifying a
-          <a href="https://www.rfc-editor.org/rfc/rfc7519#section-4"
-            >JWT Claims Set</a
-          >
-          conforming to the Verifiable Credentials 1.1 JWT format in the `cty`
-          header.
-        </p>
-        <table>
-          <tr>
-            <td>Type name:</td>
-            <td>application</td>
-          </tr>
-          <tr>
-            <td>Subtype name:</td>
-            <td>application/credential-claims-set-1.1+json</td>
-          </tr>
-          <tr>
-            <td>Required parameters:</td>
-            <td>None</td>
-          </tr>
-          <tr>
-            <td>Encoding considerations:</td>
-            <td>
-              Resources that use the
-              "<code>application/credential-claims-set-1.1+json</code>" Media
-              Type are required to conform to all of the requirements for the
-              "<code>application/json</code>" Media Type and are therefore
-              subject to the same encoding considerations specified in Section
-              11 of [[!RFC7159]].
-            </td>
-          </tr>
-          <tr>
-            <td>Security considerations:</td>
-            <td>As defined in this specification.</td>
-          </tr>
-          <tr>
-            <td>Contact:</td>
-            <td>
-              W3C Verifiable Credentials Working Group
-              <a href="mailto:public-vc-wg@w3.org">public-vc-wg@w3.org</a>
-            </td>
-          </tr>
-        </table>
-        <div class="issue" data-number="42"></div>
-      </section>
+      <h2>
+        The <code>application/credential-claims-set-1.1+json</code> Media Type
+      </h2>
+      <table>
+        <tr>
+          <td>Security considerations:</td>
+          <td>As defined in this specification.</td>
+        </tr>
+        <tr>
+          <td>Contact:</td>
+          <td>
+            W3C Verifiable Credentials Working Group
+            <a href="mailto:public-vc-wg@w3.org">public-vc-wg@w3.org</a>
+          </td>
+        </tr>
+      </table>
+      <div class="issue" data-number="42"></div>
     </section>
   </body>
 </html>
