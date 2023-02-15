@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      Securing Verifiable Credentials using Authentic Chained Data Containers
+    </title>
+    <script
+      src="https://www.w3.org/Tools/respec/respec-w3c"
+      class="remove"
+    ></script>
+    <script class="remove">
+      // See https://github.com/w3c/respec/wiki/ for how to configure ReSpec
+      var respecConfig = {
+        specStatus: "unofficial",
+        editors: [
+          { name: "Dr. Sam Smith (ProSapien)", url: "https://keri.one/" },
+          {
+            name: "Phil Feairheller (Global Legal Entity Identifier Foundation)",
+            url: "https://www.gleif.org/",
+          },
+          {
+            name: "Kevin Griffin (Global Legal Entity Identifier Foundation)",
+            url: "https://www.gleif.org/",
+          },
+        ],
+        authors: [],
+        // the specification's short name, as in http://www.w3.org/TR/short-name/
+        shortName: "vc-acdc",
+
+        localBiblio: {
+          ACDC: {
+            title: "Authentic Chained Data Containers",
+            href: "https://github.com/trustoverip/tswg-acdc-specification",
+            authors: ["S. Smith"],
+            publisher: "Trust Over IP Foundation",
+          },
+          KERI: {
+            title: "Key Event Receipt Infrastructure",
+            href: "https://github.com/WebOfTrust/ietf-keri",
+            authors: ["S. Smith"],
+          },
+          CESR: {
+            title: "Composable Event Streaming Representation",
+            href: "https://github.com/WebOfTrust/ietf-cesr",
+            authors: ["S. Smith"],
+          },
+          SAID: {
+            title: "Self-Addressing Identifiers",
+            href: "https://github.com/WebOfTrust/ietf-said",
+            authors: ["S. Smith"],
+          },
+          AID: {
+            title: "Attributable (Autonomic) Identifiers (KERI)",
+            href: "https://github.com/WebOfTrust/ietf-keri",
+            authors: ["S. Smith"],
+          },
+          "CESR Proof": {
+            title: "CESR Proof Signatures",
+            href: "https://github.com/WebOfTrust/ietf-cesr-proof",
+            authors: ["P. Feairheller"],
+          },
+        },
+
+        github: "https://github.com/weboftrust/vc-acdc/",
+        includePermalinks: false,
+
+        // if there a publicly available Editor's Draft, this is the link
+        edDraftURI: "https://weboftrust.github.io/vc-acdc/",
+
+        maxTocLevel: 2,
+        inlineCSS: true,
+
+        license: "Apache-2.0",
+      };
+    </script>
+  </head>
+  <body>
+    <section id="abstract">
+      <p>
+        This specification defines how Verifiable Credentials can be secured
+        using Authentic Chained Data Containers [ACDC].
+      </p>
+    </section>
+    <section id="sotd"></section>
+
+    <section id="introduction">
+      <h2>Introduction</h2>
+      <p>
+        Authentic Chained Data Containers (ACDC) [[!ACDC]] is a means of
+        expressing
+        <a>claims</a> to be transferred between two parties. Providing a
+        representation of the Verifiable Credentials Data Model for ACDC allows
+        existing systems and libraries to participate in the ecosystem described
+        in Section <a href="#ecosystem-overview"></a>. Some of the major
+        distinguishing features of ACDCs include normative support for chaining,
+        use of composable JSON Schema [JSch][JSchCp], support for Ricardian
+        contracts [RC], support for chain-link confidentiality [CLC], a well
+        defined security model derived from KERI [KERI][KERI_ID], compact
+        formats for resource constrained applications, simple partial disclosure
+        mechanisms and simple selective disclosure mechanisms. ACDCs provision
+        data using a synergy of provenance, protection, and performance.
+      </p>
+
+      <section>
+        <h5>Relation to the Verifiable Credentials Data Model</h5>
+
+        <p>
+          This specification defines encoding rules of the Verifiable Credential
+          Data Model within an ACDC.
+        </p>
+      </section>
+
+      <section>
+        <h5>ACDC Considerations</h5>
+
+        <section>
+          <h6>ACDC Encoding</h6>
+          <p class="note">
+            Encoding of a credential within the payload of an ACDC
+
+            Create payload attribute
+
+            populate relevant ACDC properties 
+
+            <code>d/i/s/a/p</code>
+          </p>
+                
+          <p class="note">
+            Payload as SAID
+          </p>
+
+          <p class="note">
+            CESR representation of signed ACDC
+          </p>
+        </section>
+
+        <section>
+          <h6>ACDC Decoding</h6>
+          <p class="note">
+            Decoding of a credential within the payload of an ACDC
+          </p>
+                
+          <p class="note">
+            Payload as SAID
+          </p>
+
+          <p class="note">
+            CESR representation of signed ACDC
+          </p>
+        </section>
+
+        <section>
+            <h6>ACDC Signing</h6>
+            <p class="note">
+                CESR / CESR Proof signatures
+              </p>
+          </section>
+      </section>
+    </section>
+
+      <h2>Version 1.1</h2>
+      <section id="production">
+        <h2>Production</h2>
+
+        <p>
+          This section describes how to produce a VC-ACDC encoded
+          <code>VerifiableCredential</code> from an object of media type
+          <code>application/credential+ld+json</code>.
+        </p>
+
+        <p class="issue">This section needs to be reference the addition of a payload attribute to the ACDC specification.</p>
+
+        <section>
+
+          <section>
+            <h4>issuer -> iss</h4>
+
+            <p>
+              This member MUST be present in the
+              <code>payload.vc.issuer</code> attribute as either a string or an
+              <code>object</code> with and <code>id</code>.
+            </p>
+
+            <p>This member MUST be present <code>payload.iss</code>.</p>
+
+            <p>
+              In the case that <code>payload.vc.issuer</code> is an object,
+              <code>payload.iss</code> MUST be
+              <code>payload.vc.issuer.id</code>.
+            </p>
+
+            <p>
+              In the case that
+              <code>payload.vc.issuer</code> is a string,
+              <code>payload.iss</code> must be
+              <code>payload.vc.issuer</code>
+            </p>
+          </section>
+
+          <section>
+            <h4>issuanceDate -> nbf</h4>
+
+            <p>
+              This member MUST be present in the
+              <code>payload.vc.issuanceDate</code> attribute as an XMLDateTime
+              String.
+            </p>
+
+            <p>
+              This member MUST be present <code>payload.nbf</code> as a unix
+              timestamp.
+            </p>
+
+            <p>
+              In the case that the <code>issuanceDate</code> includes leap
+              seconds, it is not possible to detect them when the date time is
+              represented in <code>nbf</code>
+            </p>
+          </section>
+
+          <p class="issue">This section needs to be defined.</p>
+
+          <section>
+            <h4>issuance</h4>
+
+            <p>
+              The header and payload converted into a JWT, in accorance with the
+              RFC:
+              <a href="https://www.rfc-editor.org/rfc/rfc7519#section-7.1"
+                >RFC7519 Section 7.1</a
+              >
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <h3>Instead of...</h3>
+          <p>The following steps are one way to obtain this representation:</p>
+          <ol>
+            <li>
+              Complete the mapping for
+              <a href="#in-addition-to">In Addition To...</a>.
+            </li>
+            <li>
+              Remove any properties from the
+              <code>application/credential+ld+json</code> that were mapped.
+            </li>
+            <li>
+              Set the resulting object to be the <code>vc</code> member of the
+              claim set.
+            </li>
+          </ol>
+
+          <p class="note">
+            The object value for the <code>vc</code> property, when
+            <a href="#instead-of">Instead of...</a> production rules have been
+            applied, is not of media type
+            <code>application/credential+ld+json</code>.
+          </p>
+        </section>
+      </section>
+    </section>
+    <section>
+      <h2>Version 2</h2>
+      <p class="note">
+        This representation relies on the addition of a <code>payload</code> attribute to ACDC.
+      </p>
+      <p class="note">
+        Production of this representation may use <code>credential+ld+json</code> as an input.
+      </p>
+      <section>
+        <h2>Credential</h2>
+        <aside class="example" title="credential as acdc payload">
+          <pre
+            data-include="./examples/vc-2.0/credential.json"
+            data-include-format="json"
+          ></pre>
+        </aside>
+        <p class="note">
+
+        </p>
+      </section>
+      <section>
+        <h2>Verifiable Credential</h2>
+        <aside class="example" title="verifiable credential">
+          <p>An encoded verifiable credential (using cesr proof signature).</p>
+          <pre
+            data-include="./examples/vc-2.0/verifiable-credential.cesr"
+            data-include-format="text"
+          ></pre>
+        </aside>
+      </section>
+    </section>
+
+    <section>
+      <h2>Privacy Considerations</h2>
+    </section>
+    <section>
+      <h2>Security Considerations</h2>
+    </section>
+
+    <section class="appendix informative">
+      <h2>IANA Considerations</h2>
+        <h2>
+          The <code>application/credential-claims-set-1.1+json</code> Media Type
+        </h2>
+        <p>
+          This specification registers the
+          <code>application/credential-claims-set-1.1+json</code> MIME Media
+          Type specifically for identifying a
+          <a href="https://www.rfc-editor.org/rfc/rfc7519#section-4"
+            >JWT Claims Set</a
+          >
+          conforming to the Verifiable Credentials 1.1 JWT format in the `cty`
+          header.
+        </p>
+        <table>
+          <tr>
+            <td>Type name:</td>
+            <td>application</td>
+          </tr>
+          <tr>
+            <td>Subtype name:</td>
+            <td>application/credential-claims-set-1.1+json</td>
+          </tr>
+          <tr>
+            <td>Required parameters:</td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td>Encoding considerations:</td>
+            <td>
+              Resources that use the
+              "<code>application/credential-claims-set-1.1+json</code>" Media
+              Type are required to conform to all of the requirements for the
+              "<code>application/json</code>" Media Type and are therefore
+              subject to the same encoding considerations specified in Section
+              11 of [[!RFC7159]].
+            </td>
+          </tr>
+          <tr>
+            <td>Security considerations:</td>
+            <td>As defined in this specification.</td>
+          </tr>
+          <tr>
+            <td>Contact:</td>
+            <td>
+              W3C Verifiable Credentials Working Group
+              <a href="mailto:public-vc-wg@w3.org">public-vc-wg@w3.org</a>
+            </td>
+          </tr>
+        </table>
+        <div class="issue" data-number="42"></div>
+      </section>
+    </section>
+  </body>
+</html>
