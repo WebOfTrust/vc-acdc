@@ -14,17 +14,18 @@
       var respecConfig = {
         specStatus: "unofficial",
         editors: [
-          { name: "Dr. Sam Smith (ProSapien)", url: "https://keri.one/" },
+          { name: "Dr. Samual Smith (ProSapien)", url: "https://keri.one/" },
           {
             name: "Phil Feairheller (Global Legal Entity Identifier Foundation)",
             url: "https://www.gleif.org/",
           },
+        ],
+        authors: [
           {
             name: "Kevin Griffin (Global Legal Entity Identifier Foundation)",
             url: "https://www.gleif.org/",
           },
         ],
-        authors: [],
         // the specification's short name, as in http://www.w3.org/TR/short-name/
         shortName: "vc-acdc",
 
@@ -60,6 +61,22 @@
             href: "https://github.com/WebOfTrust/ietf-cesr-proof",
             authors: ["P. Feairheller"],
           },
+          JSONPath: {
+            title: "JSON Path",
+            href: "https://datatracker.ietf.org/wg/jsonpath/about/",
+          },
+          JSCH: {
+            title: "JSON Schema",
+            href: "https://datatracker.ietf.org/doc/html/draft-bhutton-json-schema-01",
+          },
+          RC: {
+            title: "Ricardian Contract",
+            href: "https://en.wikipedia.org/wiki/Ricardian_contract",
+          },
+          CLC: {
+            title: "Chain Link Confidentiality",
+            href: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2045818",
+          },
         },
 
         github: "https://github.com/weboftrust/vc-acdc/",
@@ -79,7 +96,7 @@
     <section id="abstract">
       <p>
         This specification defines how Verifiable Credentials can be secured
-        using Authentic Chained Data Containers [ACDC].
+        using Authentic Chained Data Containers [[ACDC]].
       </p>
     </section>
     <section id="sotd"></section>
@@ -87,118 +104,134 @@
     <section id="introduction">
       <h2>Introduction</h2>
       <p>
-        Authentic Chained Data Containers (ACDC) [[!ACDC]] is a means of
+        Authentic Chained Data Containers (ACDC) [[ACDC]] is a means of
         providing an authentication and autorization layer for the payload
         contained witin across multiple media types. Some of the major
         distinguishing features of ACDCs include normative support for chaining,
-        use of composable JSON Schema [JSch][JSchCp], support for Ricardian
-        contracts [RC], support for chain-link confidentiality [CLC], a well
-        defined security model derived from KERI [KERI][KERI_ID], compact
-        formats for resource constrained applications, simple partial disclosure
-        mechanisms and simple selective disclosure mechanisms. ACDCs provision
-        data using a synergy of provenance, protection, and performance.
+        use of composable JSON Schema [[!JSCH]], support for Ricardian contracts
+        [[RC]], support for chain-link confidentiality [[CLC]], a well defined
+        security model derived from KERI [[KERI]], compact formats for resource
+        constrained applications, simple partial disclosure mechanisms and
+        simple selective disclosure mechanisms. ACDCs provision data using a
+        synergy of provenance, protection, and performance.
       </p>
 
       <section>
         <h5>Relation to the Verifiable Credentials Data Model</h5>
 
         <p>
-          This specification defines a mechanism of the creating a Verifiable
-          Proof for a Verifiable Credential Data Model as an ACDC.
+          This specification defines transformation rules of an Authentic
+          Chained Data Container onto the Verifiable Credential Data Model. It
+          further defines processing rules for how and when to make use of
+          specific ACDC attributes to create Verifiable Credential Data Model
+          metadata from ACDC attribtues.
         </p>
       </section>
 
       <section>
-        <h5>VC Data Model Considerations</h5>
+        <h5>ACDC Extensions</h5>
 
-        <section>
-          <h6>Embedding a VC in an ACDC</h6>
-          <p class="note">
-            Encoding of a credential within the payload of an ACDC Create
-            payload attribute populate relevant ACDC properties
+        <p>
+          This specification introduces a new attribute name <code>p</code>,
+          which provides an additional container structure for handling arbitray
+          payloads for ACDCs. This object is enclosed in the
+          <code>a</code> (attribute) block of an ACDC:
+        </p>
 
-            <code>d/i/s/a/p</code>
-          </p>
-
-          <p class="note">Payload as SAID</p>
-
-          <p class="note">CESR representation of signed ACDC</p>
-        </section>
+        <ul>
+          <li>
+            <code>p</code> JSON object, which MAY be present in a ACDC
+            verifiable proof. The object contains the credential according to
+            this specification.
+          </li>
+        </ul>
       </section>
     </section>
 
-    <h2>Version 1.1</h2>
-    <section id="production">
-      <h2>Production</h2>
-
-      <p>
-        This section describes how to produce a VC-ACDC encoded
-        <code>VerifiableCredential</code> from an object of media type
-        <code>application/credential+ld+json</code>.
-      </p>
-
-      <p class="issue">
-        This section needs to be reference the addition of a payload attribute
-        to the ACDC specification.
-      </p>
+    <section id="version-1.1">
+      <h2>Version 1.1</h2>
+      This section uses [[!JSONPath]] to represent the field mappings.
+      <ul>
+        <li>
+          <code>$.dt</code> MUST represent the
+          <code>$.expirationDate</code> property, encoded as a UNIX timestamp
+          (NumericDate).
+        </li>
+        <li>
+          <code>$.i</code> MUST represent the <code>$.issuer.id</code> property
+          of a credential.
+        </li>
+        <li>
+          <code>$.a.i</code> MUST represent the
+          <code>$.credentialSubject.id</code> property of a credential.
+        </li>
+      </ul>
+      <p class="note">Add Data Attestation transformation</p>
     </section>
 
-    <section>
-      <h2>Version 2</h2>
-      <p class="note">
-        This representation relies on the addition of a
-        <code>payload</code> attribute to ACDC.
-
-        Describe the the implicit @context
-      </p>
-      <section>
-        <h2>Credential</h2>
-        <aside class="example" title="credential as acdc payload">
-          <pre
-            data-include="./examples/vc-2.0/credential.json"
-            data-include-format="json"
-          ></pre>
-        </aside>
-        <p class="note"></p>
-      </section>
-      <section>
-        <h2>Verifiable Credential</h2>
-        <aside class="example" title="verifiable credential">
-          <p>An encoded verifiable credential (using cesr proof signature).</p>
-          <pre
-            data-include="./examples/vc-2.0/verifiable-credential.cesr"
-            data-include-format="text"
-          ></pre>
-        </aside>
-      </section>
+    <section id="version-2.0">
+      <h2>Version 2.0</h2>
+      This section uses [[!JSONPath]] to represent the field mappings.
+      <ul>
+        <li>
+          <code>$.i</code> MUST represent the <code>$.issuer.id</code> property
+          of a credential.
+        </li>
+        <li>
+          <code>$.i</code> MUST represent the <code>$.issuer.id</code> property
+          of a credential.
+        </li>
+        <li>
+          <code>$.dt</code> MUST represent the <code>$.validFrom</code> property
+          property of a credential.
+        </li>
+      </ul>
+      <p class="note">Add Data Attestation transformation</p>
     </section>
 
     <section>
       <h2>Privacy Considerations</h2>
     </section>
+
     <section>
       <h2>Security Considerations</h2>
     </section>
 
     <section class="appendix informative">
       <h2>IANA Considerations</h2>
-      <h2>
-        The <code>application/credential-claims-set-1.1+json</code> Media Type
-      </h2>
-      <table>
-        <tr>
-          <td>Security considerations:</td>
-          <td>As defined in this specification.</td>
-        </tr>
-        <tr>
-          <td>Contact:</td>
-          <td>
-            W3C Verifiable Credentials Working Group
-            <a href="mailto:public-vc-wg@w3.org">public-vc-wg@w3.org</a>
-          </td>
-        </tr>
-      </table>
-      <div class="issue" data-number="42"></div>
+      <section id="vc-acdc-media-type">
+        <h2>The <code>application/vc+acdc</code> Media Type</h2>
+        <p>
+          This specification registers the <code>application/vc+acdc</code> MIME
+          Media Type specifically for identifying a [[ACDC]].
+        </p>
+        <table>
+          <tr>
+            <td>Type name:</td>
+            <td>application</td>
+          </tr>
+          <tr>
+            <td>Subtype name:</td>
+            <td>application/vc+acdc</td>
+          </tr>
+          <tr>
+            <td>Required parameters:</td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td>Encoding considerations:</td>
+            <td>
+              <code>application/vc+acdc</code> values are encoded as a series of
+              [[SAID]] values and some utf-8?
+              <p class="note">tbd</p>
+            </td>
+          </tr>
+          <tr>
+            <td>Security considerations:</td>
+            <td>As defined in this specification.</td>
+          </tr>
+        </table>
+      </section>
     </section>
   </body>
 </html>
