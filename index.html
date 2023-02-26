@@ -167,7 +167,23 @@
           <code>$.credentialSubject.id</code> property of a credential.
         </li>
       </ul>
-      <p class="note">Add Data Attestation transformation</p>
+
+      <h5>ACDC Data Attestation Considerations</h5>
+      <ul>
+        <li>
+          <code>$.dt</code> MUST represent the
+          <code>$.expirationDate</code> property, encoded as a UNIX timestamp
+          (NumericDate).
+        </li>
+        <li>
+          <code>$.i</code> MUST represent the <code>$.issuer.id</code> property
+          of a credential.
+        </li>
+        <li>
+          <code>$.a.d</code> MUST represent the
+          <code>$.credentialSubject.id</code> property of a credential.
+        </li>
+      </ul>
     </section>
 
     <section id="version-2.0">
@@ -187,7 +203,22 @@
           <code>$.credentialSubject.id</code> property of a credential.
         </li>
       </ul>
-      <p class="note">Add Data Attestation transformation</p>
+      <h5>ACDC Data Attestation Considerations</h5>
+      <ul>
+        <li>
+          <code>$.dt</code> MUST represent the
+          <code>$.expirationDate</code> property, encoded as a UNIX timestamp
+          (NumericDate).
+        </li>
+        <li>
+          <code>$.i</code> MUST represent the <code>$.issuer.id</code> property
+          of a credential.
+        </li>
+        <li>
+          <code>$.a.d</code> MUST represent the
+          <code>$.credentialSubject.id</code> property of a credential.
+        </li>
+      </ul>
     </section>
 
     <section id="conformance"></section>
