@@ -164,13 +164,13 @@
         <ol>
           <li>Create a JSON object.</li>
           <li>
-            If <code>$.dt</code> is present, the UNIX timestamp MUST be
+            If <code>$.a.dt</code> is present, the UNIX timestamp MUST be
             converted to an [<a data-cite="XMLSCHEMA11-2#dateTime"
               >XMLSCHEMA11-2</a
             >] <code>date-time</code>, and MUST be used to set the value of the
-            <code>expirationDate</code>
-            <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of
-            <code>credentialSubject</code> of the new JSON object.
+            <code>issuanceDate</code>
+            <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
+            JSON object.
           </li>
           <li>
             If <code>$.i</code> is present, the value MUST be used to set the
@@ -187,17 +187,33 @@
             object.
           </li>
         </ol>
+
+        <aside class="example" title="Basic ACDC">
+          <pre
+            data-include="./examples/acdc.json"
+            data-include-format="json"
+          ></pre>
+        </aside>
+
+        <aside class="example" title="VC-DATA-MODEL 1.1">
+          <pre
+            data-include="./examples/1.1-result.json"
+            data-include-format="json"
+          ></pre>
+        </aside>
       </section>
+
       <h6>ACDC Data Attestation Decoding</h6>
       <ol>
         <li>Create a JSON object.</li>
         <li>
-          If <code>$.dt</code> is present, the UNIX timestamp MUST be converted
-          to an [<a data-cite="XMLSCHEMA11-2#dateTime">XMLSCHEMA11-2</a>]
-          <code>date-time</code>, and MUST be used to set the value of the
-          <code>expirationDate</code>
-          <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of
-          <code>credentialSubject</code> of the new JSON object.
+          If <code>$.a.dt</code> is present, the UNIX timestamp MUST be
+          converted to an [<a data-cite="XMLSCHEMA11-2#dateTime"
+            >XMLSCHEMA11-2</a
+          >] <code>date-time</code>, and MUST be used to set the value of the
+          <code>issuanceDate</code>
+          <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new JSON
+          object.
         </li>
         <li>
           If <code>$.i</code> is present, the value MUST be used to set the
@@ -214,6 +230,20 @@
           object.
         </li>
       </ol>
+
+      <aside class="example" title="Basic ACDC">
+        <pre
+          data-include="./examples/acdc-data-attestation.json"
+          data-include-format="json"
+        ></pre>
+      </aside>
+
+      <aside class="example" title="VC-DATA-MODEL 1.1">
+        <pre
+          data-include="./examples/1.1-result-data-attestation.json"
+          data-include-format="json"
+        ></pre>
+      </aside>
     </section>
 
     <section id="version-2.0">
@@ -223,9 +253,10 @@
       <ol>
         <li>Create a JSON object.</li>
         <li>
-          If <code>$.dt</code> is present, the UNIX timestamp MUST be converted
-          to an [<a data-cite="XMLSCHEMA11-2#dateTime">XMLSCHEMA11-2</a>]
-          <code>date-time</code>, and MUST be used to set the value of the
+          If <code>$.a.dt</code> is present, the UNIX timestamp MUST be
+          converted to an [<a data-cite="XMLSCHEMA11-2#dateTime"
+            >XMLSCHEMA11-2</a
+          >] <code>date-time</code>, and MUST be used to set the value of the
           <code>validFrom</code>
           <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of
           <code>credentialSubject</code> of the new JSON object.
@@ -245,13 +276,29 @@
           object.
         </li>
       </ol>
+
+      <aside class="example" title="Basic ACDC">
+        <pre
+          data-include="./examples/acdc.json"
+          data-include-format="json"
+        ></pre>
+      </aside>
+
+      <aside class="example" title="VC-DATA-MODEL 1.1">
+        <pre
+          data-include="./examples/2.0-result.json"
+          data-include-format="json"
+        ></pre>
+      </aside>
+
       <h5>ACDC Data Attestation Considerations</h5>
       <ol>
         <li>Create a JSON object.</li>
         <li>
-          If <code>$.dt</code> is present, the UNIX timestamp MUST be converted
-          to an [<a data-cite="XMLSCHEMA11-2#dateTime">XMLSCHEMA11-2</a>]
-          <code>date-time</code>, and MUST be used to set the value of the
+          If <code>$.a.dt</code> is present, the UNIX timestamp MUST be
+          converted to an [<a data-cite="XMLSCHEMA11-2#dateTime"
+            >XMLSCHEMA11-2</a
+          >] <code>date-time</code>, and MUST be used to set the value of the
           <code>validFrom</code>
           <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of
           <code>credentialSubject</code> of the new JSON object.
@@ -271,6 +318,20 @@
           object.
         </li>
       </ol>
+
+      <aside class="example" title="Basic ACDC Data Attestation">
+        <pre
+          data-include="./examples/acdc-data-attestation.json"
+          data-include-format="json"
+        ></pre>
+      </aside>
+
+      <aside class="example" title="VC-DATA-MODEL 1.1">
+        <pre
+          data-include="./examples/2.0-result-data-attestation.json"
+          data-include-format="json"
+        ></pre>
+      </aside>
     </section>
 
     <section id="conformance"></section>

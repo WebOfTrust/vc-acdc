@@ -1,0 +1,14 @@
+{
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1",
+      "https://www.w3.org/2018/credentials/examples/v1"
+    ],
+    "issuer": {
+      "id": "EmkPreYpZfFk66jpf3uFv7vklXKhzBrAqjsKAn2EDIPM"
+    },
+    "validFrom": "2021-06-09T17:35:54.169967+00:00",
+    "credentialSubject": {
+      "id": "EQzFVaMasUf4cZZBKA0pUbRc9T8yUXRFLyM1JDASYqAA"
+    }
+  }
+  
