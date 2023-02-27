@@ -88,7 +88,7 @@
         maxTocLevel: 2,
         inlineCSS: true,
 
-        license: "Apache-2.0",
+        license: "w3c-software-doc",
       };
     </script>
   </head>
@@ -96,7 +96,7 @@
     <section id="abstract">
       <p>
         This specification defines how Verifiable Credentials can be secured
-        using Authentic Chained Data Containers [[ACDC]].
+        using Authentic Chained Data Containers (ACDC).
       </p>
     </section>
     <section id="sotd"></section>
@@ -104,16 +104,16 @@
     <section id="introduction">
       <h2>Introduction</h2>
       <p>
-        Authentic Chained Data Containers [[ACDC]] is a means of
-        providing an authentication and autorization layer for the payload
-        contained witin. Some of the major
-        distinguishing features of ACDCs include normative support for chaining,
-        use of composable JSON Schema [[!JSCH]], support for Ricardian contracts
-        [[RC]], support for chain-link confidentiality [[CLC]], a well defined
-        security model derived from KERI [[KERI]], compact formats for resource
-        constrained applications, simple partial disclosure mechanisms and
-        simple selective disclosure mechanisms. ACDCs provision data using a
-        synergy of provenance, protection, and performance.
+        Authentic Chained Data Containers [[!ACDC]] is a means of providing an
+        authentication and autorization layer for the payload contained within.
+        Some of the major distinguishing features of ACDCs include normative
+        support for chaining, use of composable JSON Schema [[!JSCH]], support
+        for Ricardian contracts [[?RC]], support for chain-link confidentiality
+        [[?CLC]], a well defined security model derived from KERI [[!KERI]],
+        compact formats for resource constrained applications, simple partial
+        disclosure mechanisms and simple selective disclosure mechanisms. ACDCs
+        provision data using a synergy of provenance, protection, and
+        performance.
       </p>
 
       <section>
@@ -135,9 +135,10 @@
           This specification introduces a new attribute name <code>p</code>,
           which provides an additional container structure for handling arbitray
           payloads for ACDCs. This object is enclosed in the
-          <code>a</code> (attribute) block of an [[ACDC]].
-          <div class="issue" data-number="1"></div>
+          <code>a</code> (attribute) block of an [[!ACDC]].
         </p>
+
+        <div class="issue" data-number="1"></div>
 
         <ul>
           <li>
@@ -152,73 +153,124 @@
     <section id="version-1.1">
       <h2>Version 1.1</h2>
       This section uses [[!JSONPath]] to represent the field mappings.
-      <ul>
+      <h5>ACDC Considerations</h5>
+      <section>
+        <h6>ACDC Decoding</h6>
+        <p>
+          To decode a ACDC to a standard
+          <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> the
+          following transformations MUST be performed:
+        </p>
+        <ol>
+          <li>Create a JSON object.</li>
+          <li>
+            If <code>$.dt</code> is present, the UNIX timestamp MUST be
+            converted to an [<a data-cite="XMLSCHEMA11-2#dateTime"
+              >XMLSCHEMA11-2</a
+            >] <code>date-time</code>, and MUST be used to set the value of the
+            <code>expirationDate</code>
+            <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of
+            <code>credentialSubject</code> of the new JSON object.
+          </li>
+          <li>
+            If <code>$.i</code> is present, the value MUST be used to set the
+            <code>$.issuer.id</code>
+            <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
+            <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> JSON
+            object.
+          </li>
+          <li>
+            If <code>$.a.i</code> is present, the value MUST be used to set the
+            <code>$.credentialSubject.id</code>
+            <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
+            <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> JSON
+            object.
+          </li>
+        </ol>
+      </section>
+      <h6>ACDC Data Attestation Decoding</h6>
+      <ol>
+        <li>Create a JSON object.</li>
         <li>
-          <code>$.dt</code> MUST represent the
-          <code>$.expirationDate</code> property, encoded as a UNIX timestamp
-          (NumericDate).
+          If <code>$.dt</code> is present, the UNIX timestamp MUST be converted
+          to an [<a data-cite="XMLSCHEMA11-2#dateTime">XMLSCHEMA11-2</a>]
+          <code>date-time</code>, and MUST be used to set the value of the
+          <code>expirationDate</code>
+          <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of
+          <code>credentialSubject</code> of the new JSON object.
         </li>
         <li>
-          <code>$.i</code> MUST represent the <code>$.issuer.id</code> property
-          of a credential.
+          If <code>$.i</code> is present, the value MUST be used to set the
+          <code>$.issuer.id</code>
+          <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
+          <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> JSON
+          object.
         </li>
         <li>
-          <code>$.a.i</code> MUST represent the
-          <code>$.credentialSubject.id</code> property of a credential.
+          If <code>$.a.d</code> is present, the value MUST be used to set the
+          <code>$.credentialSubject.id</code>
+          <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
+          <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> JSON
+          object.
         </li>
-      </ul>
-
-      <h5>ACDC Data Attestation Considerations</h5>
-      <ul>
-        <li>
-          <code>$.dt</code> MUST represent the
-          <code>$.expirationDate</code> property, encoded as a UNIX timestamp
-          (NumericDate).
-        </li>
-        <li>
-          <code>$.i</code> MUST represent the <code>$.issuer.id</code> property
-          of a credential.
-        </li>
-        <li>
-          <code>$.a.d</code> MUST represent the
-          <code>$.credentialSubject.id</code> property of a credential.
-        </li>
-      </ul>
+      </ol>
     </section>
 
     <section id="version-2.0">
       <h2>Version 2.0</h2>
       This section uses [[!JSONPath]] to represent the field mappings.
-      <ul>
+      <h5>ACDC Considerations</h5>
+      <ol>
+        <li>Create a JSON object.</li>
         <li>
-          <code>$.dt</code> MUST represent the <code>$.validFrom</code> property
-          property of a credential.
+          If <code>$.dt</code> is present, the UNIX timestamp MUST be converted
+          to an [<a data-cite="XMLSCHEMA11-2#dateTime">XMLSCHEMA11-2</a>]
+          <code>date-time</code>, and MUST be used to set the value of the
+          <code>validFrom</code>
+          <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of
+          <code>credentialSubject</code> of the new JSON object.
         </li>
         <li>
-          <code>$.i</code> MUST represent the <code>$.issuer.id</code> property
-          of a credential.
+          If <code>$.i</code> is present, the value MUST be used to set the
+          <code>$.issuer.id</code>
+          <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
+          <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> JSON
+          object.
         </li>
         <li>
-          <code>$.a.i</code> MUST represent the
-          <code>$.credentialSubject.id</code> property of a credential.
+          If <code>$.a.i</code> is present, the value MUST be used to set the
+          <code>$.credentialSubject.id</code>
+          <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
+          <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> JSON
+          object.
         </li>
-      </ul>
+      </ol>
       <h5>ACDC Data Attestation Considerations</h5>
-      <ul>
+      <ol>
+        <li>Create a JSON object.</li>
         <li>
-          <code>$.dt</code> MUST represent the
-          <code>$.expirationDate</code> property, encoded as a UNIX timestamp
-          (NumericDate).
+          If <code>$.dt</code> is present, the UNIX timestamp MUST be converted
+          to an [<a data-cite="XMLSCHEMA11-2#dateTime">XMLSCHEMA11-2</a>]
+          <code>date-time</code>, and MUST be used to set the value of the
+          <code>validFrom</code>
+          <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of
+          <code>credentialSubject</code> of the new JSON object.
         </li>
         <li>
-          <code>$.i</code> MUST represent the <code>$.issuer.id</code> property
-          of a credential.
+          If <code>$.i</code> is present, the value MUST be used to set the
+          <code>$.issuer.id</code>
+          <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
+          <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> JSON
+          object.
         </li>
         <li>
-          <code>$.a.d</code> MUST represent the
-          <code>$.credentialSubject.id</code> property of a credential.
+          If <code>$.a.d</code> is present, the value MUST be used to set the
+          <code>$.credentialSubject.id</code>
+          <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
+          <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> JSON
+          object.
         </li>
-      </ul>
+      </ol>
     </section>
 
     <section id="conformance"></section>
@@ -237,7 +289,7 @@
         <h2>The <code>application/vc+acdc</code> Media Type</h2>
         <p>
           This specification registers the <code>application/vc+acdc</code> MIME
-          Media Type specifically for identifying a [[ACDC]].
+          Media Type specifically for identifying a [[!ACDC]].
         </p>
         <table>
           <tr>
