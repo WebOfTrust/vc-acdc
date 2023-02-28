@@ -77,6 +77,14 @@
             title: "Chain Link Confidentiality",
             href: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2045818",
           },
+          CBOR: {
+            title: "Concise Binary Object Representation",
+            href: "https://www.rfc-editor.org/rfc/rfc8949.html"
+          },
+          MESSAGEPACK: {
+            title: "MessagePack",
+            href: "https://github.com/msgpack/msgpack/blob/master/spec.md"
+          }
         },
 
         github: "https://github.com/weboftrust/vc-acdc/",
@@ -127,129 +135,13 @@
           metadata from ACDC attribtues.
         </p>
       </section>
-
-      <section>
-        <h5>ACDC Extensions</h5>
-
-        <p>
-          This specification introduces a new attribute name <code>p</code>,
-          which provides an additional container structure for handling arbitray
-          payloads for ACDCs. This object is enclosed in the
-          <code>a</code> (attribute) block of an [[!ACDC]].
-        </p>
-
-        <div class="issue" data-number="1"></div>
-
-        <ul>
-          <li>
-            <code>p</code> JSON object, which MAY be present in a ACDC
-            verifiable proof. The object contains the credential according to
-            this specification.
-          </li>
-        </ul>
-      </section>
-    </section>
-
-    <section id="version-1.1">
-      <h2>Version 1.1</h2>
-      This section uses [[!JSONPath]] to represent the field mappings.
-      <h5>ACDC Considerations</h5>
-      <section>
-        <h6>ACDC Decoding</h6>
-        <p>
-          To decode a ACDC to a standard
-          <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> the
-          following transformations MUST be performed:
-        </p>
-        <ol>
-          <li>Create a JSON object.</li>
-          <li>
-            If <code>$.a.dt</code> is present, the UNIX timestamp MUST be
-            converted to an [<a data-cite="XMLSCHEMA11-2#dateTime"
-              >XMLSCHEMA11-2</a
-            >] <code>date-time</code>, and MUST be used to set the value of the
-            <code>issuanceDate</code>
-            <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
-            JSON object.
-          </li>
-          <li>
-            If <code>$.i</code> is present, the value MUST be used to set the
-            <code>$.issuer.id</code>
-            <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
-            <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> JSON
-            object.
-          </li>
-          <li>
-            If <code>$.a.i</code> is present, the value MUST be used to set the
-            <code>$.credentialSubject.id</code>
-            <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
-            <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> JSON
-            object.
-          </li>
-        </ol>
-
-        <aside class="example" title="Basic ACDC">
-          <pre
-            data-include="./examples/acdc.json"
-            data-include-format="json"
-          ></pre>
-        </aside>
-
-        <aside class="example" title="VC-DATA-MODEL 1.1">
-          <pre
-            data-include="./examples/1.1-result.json"
-            data-include-format="json"
-          ></pre>
-        </aside>
-      </section>
-
-      <h6>ACDC Data Attestation Decoding</h6>
-      <ol>
-        <li>Create a JSON object.</li>
-        <li>
-          If <code>$.a.dt</code> is present, the UNIX timestamp MUST be
-          converted to an [<a data-cite="XMLSCHEMA11-2#dateTime"
-            >XMLSCHEMA11-2</a
-          >] <code>date-time</code>, and MUST be used to set the value of the
-          <code>issuanceDate</code>
-          <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new JSON
-          object.
-        </li>
-        <li>
-          If <code>$.i</code> is present, the value MUST be used to set the
-          <code>$.issuer.id</code>
-          <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
-          <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> JSON
-          object.
-        </li>
-        <li>
-          If <code>$.a.d</code> is present, the value MUST be used to set the
-          <code>$.credentialSubject.id</code>
-          <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
-          <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> JSON
-          object.
-        </li>
-      </ol>
-
-      <aside class="example" title="Basic ACDC">
-        <pre
-          data-include="./examples/acdc-data-attestation.json"
-          data-include-format="json"
-        ></pre>
-      </aside>
-
-      <aside class="example" title="VC-DATA-MODEL 1.1">
-        <pre
-          data-include="./examples/1.1-result-data-attestation.json"
-          data-include-format="json"
-        ></pre>
-      </aside>
     </section>
 
     <section id="version-2.0">
       <h2>Version 2.0</h2>
       This section uses [[!JSONPath]] to represent the field mappings.
-      <h5>ACDC Considerations</h5>
+      <h5>ACDC Decoding</h5>
+      <h6>ACDC Considerations</h6> 
       <ol>
         <li>Create a JSON object.</li>
         <li>
@@ -262,14 +154,14 @@
           <code>credentialSubject</code> of the new JSON object.
         </li>
         <li>
-          If <code>$.i</code> is present, the value MUST be used to set the
+          The <code>$.i</code> attribute MUST be used to set the
           <code>$.issuer.id</code>
           <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
           <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> JSON
           object.
         </li>
         <li>
-          If <code>$.a.i</code> is present, the value MUST be used to set the
+          The <code>$.a.i</code> attribute MUST be used to set the
           <code>$.credentialSubject.id</code>
           <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
           <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> JSON
@@ -284,14 +176,14 @@
         ></pre>
       </aside>
 
-      <aside class="example" title="VC-DATA-MODEL 1.1">
+      <aside class="example" title="VC-DATA-MODEL 2.0">
         <pre
           data-include="./examples/2.0-result.json"
           data-include-format="json"
         ></pre>
       </aside>
 
-      <h5>ACDC Data Attestation Considerations</h5>
+      <h6>ACDC Data Attestation Considerations</h6>
       <ol>
         <li>Create a JSON object.</li>
         <li>
@@ -304,14 +196,14 @@
           <code>credentialSubject</code> of the new JSON object.
         </li>
         <li>
-          If <code>$.i</code> is present, the value MUST be used to set the
+          The <code>$.i</code> attribute MUST be used to set the
           <code>$.issuer.id</code>
           <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
           <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> JSON
           object.
         </li>
         <li>
-          If <code>$.a.d</code> is present, the value MUST be used to set the
+          The <code>$.a.d</code> attribute MUST be used to set the
           <code>$.credentialSubject.id</code>
           <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
           <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> JSON
@@ -326,7 +218,7 @@
         ></pre>
       </aside>
 
-      <aside class="example" title="VC-DATA-MODEL 1.1">
+      <aside class="example" title="VC-DATA-MODEL 2.0">
         <pre
           data-include="./examples/2.0-result-data-attestation.json"
           data-include-format="json"
@@ -346,11 +238,12 @@
 
     <section class="appendix informative">
       <h2>IANA Considerations</h2>
-      <section id="vc-acdc-media-type">
-        <h2>The <code>application/vc+acdc</code> Media Type</h2>
+      <section id="vc-cesr-media-type">
+        <h2>The <code>application/vc+cesr</code> Media Type</h2>
         <p>
-          This specification registers the <code>application/vc+acdc</code> MIME
-          Media Type specifically for identifying a [[!ACDC]].
+          This specification registers the <code>application/vc+cesr</code> MIME
+          Media Type specifically for identifying a [[CESR]] encoded verifiable
+          proof.
         </p>
         <table>
           <tr>
@@ -359,7 +252,7 @@
           </tr>
           <tr>
             <td>Subtype name:</td>
-            <td>application/vc+acdc</td>
+            <td>application/vc+cesr</td>
           </tr>
           <tr>
             <td>Required parameters:</td>
@@ -368,13 +261,143 @@
           <tr>
             <td>Encoding considerations:</td>
             <td>
-              Resources that use the
-              "application/vc+acdc" Media Type are
-              required to conform to all of the requirements for the
-              "application/json" Media Type and are therefore subject to the
+              Resources that use the <code>application/vc+cesr</code> Media Type are
+              required to conform to [[CESR]].
+            </td>
+          </tr>
+          <tr>
+            <td>Security considerations:</td>
+            <td>As defined in this specification.</td>
+          </tr>
+        </table>
+      </section>
+      <section id="credential-acdc-json-media-type">
+        <h2>The <code>application/credential+acdc+json</code> Media Type</h2>
+        <p>
+          This specification registers the
+          <code>application/credential+acdc+json</code> MIME Media Type
+          specifically for identifying a [[ACDC]] serialized with [[JSON]].
+        </p>
+        <table>
+          <tr>
+            <td>Type name:</td>
+            <td>application</td>
+          </tr>
+          <tr>
+            <td>Subtype name:</td>
+            <td>application/credential+acdc+json</td>
+          </tr>
+          <tr>
+            <td>Required parameters:</td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td>Encoding considerations:</td>
+            <td>
+              Resources that use the <code>application/credential+acdc+json</code> Media
+              Type are required to conform to all of the requirements for the
+              <code>application/json</code> Media Type and are therefore subject to the
               same encoding considerations specified in Section 11 of [RFC7159].
-
-              <div class="issue" data-number="2"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>Security considerations:</td>
+            <td>As defined in this specification.</td>
+          </tr>
+        </table>
+      </section>
+      <section id="credential-acdc-cbor-media-type">
+        <h2>The <code>application/credential+acdc+cbor</code> Media Type</h2>
+        <p>
+          This specification registers the
+          <code>application/credential+acdc+cbor</code> MIME Media Type
+          specifically for identifying a [[ACDC]] serialized with [[CBOR]].
+        </p>
+        <table>
+          <tr>
+            <td>Type name:</td>
+            <td>application</td>
+          </tr>
+          <tr>
+            <td>Subtype name:</td>
+            <td>application/credential+acdc+cbor</td>
+          </tr>
+          <tr>
+            <td>Required parameters:</td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td>Encoding considerations:</td>
+            <td>
+              Resources that use the <code>application/credential+acdc+cbor</code> Media Type are
+              required to conform to [[CBOR]].
+            </td>
+          </tr>
+          <tr>
+            <td>Security considerations:</td>
+            <td>As defined in this specification.</td>
+          </tr>
+        </table>
+      </section>
+      <section id="credential-acdc-msgpack-media-type">
+        <h2>The <code>application/credential+acdc+msgpack</code> Media Type</h2>
+        <p>
+          This specification registers the
+          <code>application/credential+acdc+msgpack</code> MIME Media Type
+          specifically for identifying a [[ACDC]] serialized with
+          [[MESSAGEPACK]].
+        </p>
+        <table>
+          <tr>
+            <td>Type name:</td>
+            <td>application</td>
+          </tr>
+          <tr>
+            <td>Subtype name:</td>
+            <td>application/credential+acdc+msgpack</td>
+          </tr>
+          <tr>
+            <td>Required parameters:</td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td>Encoding considerations:</td>
+            <td>
+              Resources that use the <code>application/credential+acdc+msgpack</code> Media Type are
+              required to conform to [[MESSAGEPACK]].
+            </td>
+          </tr>
+          <tr>
+            <td>Security considerations:</td>
+            <td>As defined in this specification.</td>
+          </tr>
+        </table>
+      </section>
+      <section id="credential-acdc-cesr-media-type">
+        <h2>The <code>application/credential+acdc+cesr</code> Media Type</h2>
+        <p>
+          This specification registers the
+          <code>application/credential+acdc+cesr</code> MIME Media Type
+          specifically for identifying a [[ACDC]] serialized with [[CESR]].
+        </p>
+        <table>
+          <tr>
+            <td>Type name:</td>
+            <td>application</td>
+          </tr>
+          <tr>
+            <td>Subtype name:</td>
+            <td>application/credential+acdc+cesr</td>
+          </tr>
+          <tr>
+            <td>Required parameters:</td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td>Encoding considerations:</td>
+            <td>
+              Resources that use the <code>application/credential+acdc+cesr</code> Media Type are
+              required to conform to [[CESR]].
             </td>
           </tr>
           <tr>
