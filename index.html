@@ -79,12 +79,12 @@
           },
           CBOR: {
             title: "Concise Binary Object Representation",
-            href: "https://www.rfc-editor.org/rfc/rfc8949.html"
+            href: "https://www.rfc-editor.org/rfc/rfc8949.html",
           },
           MESSAGEPACK: {
             title: "MessagePack",
-            href: "https://github.com/msgpack/msgpack/blob/master/spec.md"
-          }
+            href: "https://github.com/msgpack/msgpack/blob/master/spec.md",
+          },
         },
 
         github: "https://github.com/weboftrust/vc-acdc/",
@@ -141,7 +141,18 @@
       <h2>Version 2.0</h2>
       This section uses [[!JSONPath]] to represent the field mappings.
       <h5>ACDC Decoding</h5>
-      <h6>ACDC Considerations</h6> 
+      <h6>ACDC Considerations</h6>
+
+      <section class="informative">
+        ACDC values may contain Autonomic IDentifiers [[?AID]]s or
+        Self-Addressing Identifiers [[?SAID]]s. An AID is a fully qualified
+        Self-Certifying IDentifier (SCID) that follows the KERI protocol
+        [[?KERI]]. [[?AID]]s are fully defereancable using the KERI protocol and
+        result in a [[?KEY_STATE]] message containing machine-readable
+        information that can be used to verify the information expressed in the
+        credential.
+      </section>
+
       <ol>
         <li>Create a JSON object.</li>
         <li>
@@ -261,8 +272,8 @@
           <tr>
             <td>Encoding considerations:</td>
             <td>
-              Resources that use the <code>application/vc+cesr</code> Media Type are
-              required to conform to [[CESR]].
+              Resources that use the <code>application/vc+cesr</code> Media Type
+              are required to conform to [[CESR]].
             </td>
           </tr>
           <tr>
@@ -294,10 +305,12 @@
           <tr>
             <td>Encoding considerations:</td>
             <td>
-              Resources that use the <code>application/credential+acdc+json</code> Media
-              Type are required to conform to all of the requirements for the
-              <code>application/json</code> Media Type and are therefore subject to the
-              same encoding considerations specified in Section 11 of [RFC7159].
+              Resources that use the
+              <code>application/credential+acdc+json</code> Media Type are
+              required to conform to all of the requirements for the
+              <code>application/json</code> Media Type and are therefore subject
+              to the same encoding considerations specified in Section 11 of
+              [RFC7159].
             </td>
           </tr>
           <tr>
@@ -329,7 +342,8 @@
           <tr>
             <td>Encoding considerations:</td>
             <td>
-              Resources that use the <code>application/credential+acdc+cbor</code> Media Type are
+              Resources that use the
+              <code>application/credential+acdc+cbor</code> Media Type are
               required to conform to [[CBOR]].
             </td>
           </tr>
@@ -363,7 +377,8 @@
           <tr>
             <td>Encoding considerations:</td>
             <td>
-              Resources that use the <code>application/credential+acdc+msgpack</code> Media Type are
+              Resources that use the
+              <code>application/credential+acdc+msgpack</code> Media Type are
               required to conform to [[MESSAGEPACK]].
             </td>
           </tr>
@@ -396,7 +411,8 @@
           <tr>
             <td>Encoding considerations:</td>
             <td>
-              Resources that use the <code>application/credential+acdc+cesr</code> Media Type are
+              Resources that use the
+              <code>application/credential+acdc+cesr</code> Media Type are
               required to conform to [[CESR]].
             </td>
           </tr>
