@@ -85,6 +85,11 @@
             title: "MessagePack",
             href: "https://github.com/msgpack/msgpack/blob/master/spec.md",
           },
+          OOBI: {
+            title: "OOBI (Out-Of-Band-Introduction)",
+            href: "https://github.com/WebOfTrust/ietf-oobi",
+            authors: ["S. Smith"],
+          },
         },
 
         github: "https://github.com/weboftrust/vc-acdc/",
@@ -143,16 +148,6 @@
       <h5>ACDC Decoding</h5>
       <h6>ACDC Considerations</h6>
 
-      <section class="informative">
-        ACDC values may contain Autonomic IDentifiers [[?AID]]s or
-        Self-Addressing Identifiers [[?SAID]]s. An AID is a fully qualified
-        Self-Certifying IDentifier (SCID) that follows the KERI protocol
-        [[?KERI]]. [[?AID]]s are fully defereancable using the KERI protocol and
-        result in a [[?KEY_STATE]] message containing machine-readable
-        information that can be used to verify the information expressed in the
-        credential.
-      </section>
-
       <ol>
         <li>Create a JSON object.</li>
         <li>
@@ -169,7 +164,10 @@
           <code>$.issuer.id</code>
           <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
           <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> JSON
-          object.
+          object. The <code>$.i</code> MUST be transformed into an [[?OOBI]]
+          used to resolve the key state containing machine-readable information
+          that can be used to verify the information expressed in the
+          credential.
         </li>
         <li>
           The <code>$.a.i</code> attribute MUST be used to set the
@@ -211,7 +209,10 @@
           <code>$.issuer.id</code>
           <a data-cite="VC-DATA-MODEL#dfn-property">property</a> of the new
           <a data-cite="VC-DATA-MODEL#dfn-credential">credential</a> JSON
-          object.
+          object. The <code>$.i</code> MUST be transformed into an [[?OOBI]]
+          used to resolve the key state containing machine-readable information
+          that can be used to verify the information expressed in the
+          credential.
         </li>
         <li>
           The <code>$.a.d</code> attribute MUST be used to set the
